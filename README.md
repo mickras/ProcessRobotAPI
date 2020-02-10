@@ -32,3 +32,7 @@ following message:
     "message": "ProcessRobot API v0.1"
 }
 ```
+
+## Requirements:
+* Python3.7
+* The Python packages specified in requirements.txt
