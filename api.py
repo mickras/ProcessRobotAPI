@@ -43,6 +43,16 @@ class LatestLogRecord(Resource):
     @apiExample {curl} Example usage:
         curl -i http://localhost/latestlogrecord/ERROR/
 
+    @apiSuccess {Int} status Status code (200)
+    @apiSuccess {Int} log_id The ProcessRobot ID for the log record
+    @apiSuccess {String} process-name Name of the ProcessRobot process the log record is related to
+    @apiSuccess {Int} event_id The ProcessRobot EventID for the log record
+    @apiSuccess {String} log_level The level of the log record. Can be either INFO, WARN og ERROR
+    @apiSuccess {String} message The log message
+    @apiSuccess {String} additional_data Any additional data about the log record, that ProcessRobot might provide
+    @apiSuccess {String} process_id The ProcessRobot ID of the process that generated the log record
+    @apiSuccess {String} timestamp Timestamp for the log record
+
     @apiSuccessExample {json} Success-Response:
         HTTP/1.1 200 OK
         {

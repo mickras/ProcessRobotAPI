@@ -71,6 +71,73 @@ define({ "api": [
       }
     ],
     "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status code (200)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "log_id",
+            "description": "<p>The ProcessRobot ID for the log record</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "process-name",
+            "description": "<p>Name of the ProcessRobot process the log record is related to</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "event_id",
+            "description": "<p>The ProcessRobot EventID for the log record</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "log_level",
+            "description": "<p>The level of the log record. Can be either INFO, WARN og ERROR</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The log message</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "additional_data",
+            "description": "<p>Any additional data about the log record, that ProcessRobot might provide</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "process_id",
+            "description": "<p>The ProcessRobot ID of the process that generated the log record</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "timestamp",
+            "description": "<p>Timestamp for the log record</p>"
+          }
+        ]
+      },
       "examples": [
         {
           "title": "Success-Response:",
