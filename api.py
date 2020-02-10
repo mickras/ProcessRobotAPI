@@ -17,7 +17,6 @@ handled by the class LogHandler.
 from json import dumps
 
 from flask import Flask, Response, request
-from flask_jsonpify import jsonify
 from flask_restful import Api, Resource
 
 from LogHandler import LogHandler
