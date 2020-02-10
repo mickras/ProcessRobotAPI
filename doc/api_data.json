@@ -2,7 +2,7 @@
   {
     "type": "get",
     "url": "/",
-    "title": "Default call",
+    "title": "API version",
     "name": "DefaultCall",
     "group": "Default",
     "version": "0.0.1",
