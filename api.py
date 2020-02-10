@@ -4,6 +4,8 @@ Simple API for ProcessRobot (https://www.softomotive.com/processrobot/),
 based on Flask and Flask Restful. The back-end logic for the API is
 handled by the class LogHandler.
 
+GitHub repository: https://github.com/mickras/ProcessRobotAPI
+
 @apiDescription ProcessRobot API based on Flask
 
 @apiDefine WrongParameter
@@ -126,7 +128,7 @@ class LatestLogTimestamp(Resource):
 
 class DefaultCall(Resource):
     """
-    @api {get} / Default call
+    @api {get} / API version
     @apiName DefaultCall
     @apiGroup Default
     @apiVersion 0.0.1
