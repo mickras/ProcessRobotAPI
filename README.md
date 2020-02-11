@@ -25,7 +25,7 @@ app.run(port='5005',debug=True,host='0.0.0.0')
 
 6. Run api.py
 
-7. In your browser, go to http://<your server>:5005/ and you should see the
+7. In your browser, go to http://your-server:5005/ and you should see the
 following message:
 ```
 {
