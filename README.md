@@ -35,4 +35,7 @@ following message:
 
 ## Requirements:
 * Python3.7
-* The Python packages specified in requirements.txt
+* The Python packages specified in requirements3_7.txt
+
+* Python3.8.2
+* The Python packages specified in requirements3_8_2.txt
