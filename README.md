@@ -8,7 +8,7 @@ Simple REST API for Processrobot (https://www.softomotive.com/processrobot/), ba
 
 2. Install the required Python package dependencies:
 ```
-pip install requirements.txt   
+pip install -r requirements.txt   
 ```
 
 3. Add your ProcessRobot database connection string and credentials to LogHandler.py
