@@ -8,7 +8,7 @@ Simple REST API for Processrobot (https://www.softomotive.com/processrobot/), ba
 
 2. Install the required Python package dependencies:
 ```
-pip install requirements.txt   
+pip install -r requirements.txt   
 ```
 
 3. Add your ProcessRobot database connection string and credentials to LogHandler.py
@@ -25,7 +25,7 @@ app.run(port='5005',debug=True,host='0.0.0.0')
 
 6. Run api.py
 
-7. In your browser, go to http://<your server>:5005/ and you should see the
+7. In your browser, go to http://your-server:5005/ and you should see the
 following message:
 ```
 {
