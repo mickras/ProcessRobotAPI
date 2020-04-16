@@ -17,18 +17,22 @@ time_since_last-entry = LogHandler.TimeSinceLastLogEntry(log_handler, "INFO")
 from datetime import datetime, timedelta
 
 import pyodbc
-
+import configparser
 
 class LogHandler:
+
+    # Reading settings from config file "config.ini"
+    config = configparser.ConfigParser()
+    config.read('/config.ini')
+
     # Indstillinger for forbindelse til databasen
     # Køres scriptet på en Windows-server, skal sqldriver normalt være "{SQL Server}",
     # mens hvis scriptet køres på en Linux-server er sqldriver = sti til driver-filen
-    sqlserver =     "MYSERVER\SQLEXPRESS"
-    sqldriver =     "{/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.4.so.2.1}"
-    #sqldriver =     "{SQL Server}"
-    database =      "mydb"
-    user =          "mydbuser"
-    pwd =           "mypassword"
+    sqlserver =     config['DATABASE']['DB_HOST']
+    sqldriver =     config['DATABASE']['DB_DRIVER']
+    database =      config['DATABASE']['DB_DATABASE']
+    user =          config['DATABASE']['DB_USERNAME']
+    pwd =           config['DATABASE']['DB_PASSWORD']
 
     # Format på timestamps lavet af Processrobot. Skal forhåbentligvis ikke ændres.
     time_format =   "%Y-%m-%d %H:%M:%S"
@@ -96,9 +100,10 @@ class LogHandler:
         else:
             dict["status"] = 400
             dict["message"] = "No log entry found"
-
-        return dict
+      
         cursor.close()
+        return dict
+
 
     def GetLastLogTimestamp(self, log_type="ALL"):
         """
@@ -125,8 +130,8 @@ class LogHandler:
             dict["status"] = 400
             dict["message"] = "No log entry found"
 
-        return dict
         cursor.close()
+        return dict
 
     def TimeSinceLastLogEntry(self, log_type="ALL"):
         '''
@@ -185,5 +190,38 @@ class LogHandler:
             sub_cursor.close()
 
         dict["total_queues"] = counter
-        return dict
         cursor.close()
+        return dict
+        
+
+    def GetQueueItemsById(self, queue_id):
+
+        # Connecting to database
+        cursor = self.Connect()
+
+        # The query to run
+        sqlQuery = f'''SELECT queues.id, queues.itemtype, queue_items.value, queue_items.id, queue_items.priority FROM queues
+                    LEFT JOIN queue_items ON queues.id = queue_items.queue_id
+                    WHERE queues.id = %s ''' % (queue_id)
+
+        # Executint SQL query
+        cursor.execute(sqlQuery)
+
+        # Creating Array to hold all queue items returned from DB by name
+        processrobot_queue_items_array = []
+
+        # Foreach record returned by the database
+        for row in cursor:
+
+            # Creating single array foreach queue item
+            processrobot_queue_item = {
+                "queue_item_id": row.id,
+                "queue_item_type": row.itemtype,
+                "queue_value": row.value,
+                "priority": row.priority
+            }
+            # Adding queue item to our queue items array
+            processrobot_queue_items_array.append(processrobot_queue_item)
+
+        cursor.close()
+        return processrobot_queue_items_array

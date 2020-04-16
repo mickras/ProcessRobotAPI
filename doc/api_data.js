@@ -381,5 +381,64 @@ define({ "api": [
     },
     "filename": "./api.py",
     "groupTitle": "Queue"
+  },
+  {
+    "type": "get",
+    "url": "/getqueueItemsfromqueue/[:queue_id]",
+    "title": "Queue items from queue",
+    "name": "QueueItemsFromQueueById",
+    "group": "Queue",
+    "version": "0.0.1",
+    "description": "<p>Returns a list of all queue items in ProcessRobot by queue id. You can get the id from calling /queuestats/.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -i http://localhost/getqueueitemsfromqueue/[:queue_id]",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "queue_item_id",
+            "description": "<p>ProcessRobots ID on the queue item</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "queue_item_type",
+            "description": "<p>The Processrobot type of the queue item</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "queue_value",
+            "description": "<p>The data of the queue item</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "priority",
+            "description": "<p>The priority of the queue item</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"0\": {\n        \"queue_id\": 3,\n        \"queue_name\": \"My first queue\",\n        \"item_type\": \"Numeric\",\n        \"new_items\": 3\n    },\n    \"1\": {\n        \"queue_id\": 6,\n        \"queue_name\": \"My second queue\",\n        \"item_type\": \"Custom Object\",\n        \"new_items\": 156\n    },\n    \"total_queues\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./api.py",
+    "groupTitle": "Queue"
   }
 ] });
