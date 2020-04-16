@@ -11,7 +11,9 @@ Simple REST API for Processrobot (https://www.softomotive.com/processrobot/), ba
 pip install -r requirements.txt   
 ```
 
-3. Add your ProcessRobot database connection string and credentials to LogHandler.py
+3. Add your ProcessRobot database connection string and credentials to config.ini.template
+
+4. Rename config.ini.template to config.ini
 
 4. ProcessRobot logs all times in UTC. To convert the timestamps in the API
 responses to your local time zone, adjust the time_offset variable accordingly. The
@@ -36,3 +38,23 @@ following message:
 ## Requirements:
 * Python3.7
 * The Python packages specified in requirements.txt
+
+## Docker 
+When you want to setup the containers you run this command inside root folder:
+
+```
+docker-compose up --build -d
+```
+
+Then you will have 3 containers
+1. proocessrobot_api_doc - The documentation on the API
+2. proocessrobot_api_interface - The ProcessRobot interface used to manipulate database
+3. proocessrobot_api - The python based ProcessRobot API
+
+hostnames to the containers can be defined inside .env file.
+(can only be used if nginx-proxy is running as container on host)
+else you can hit the sites by ports
+
+1. proocessrobot_api_doc - port 5006
+2. proocessrobot_api_interface - port 5007
+3. proocessrobot_api - port 5005
