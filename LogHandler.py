@@ -23,7 +23,7 @@ class LogHandler:
 
     # Reading settings from config file "config.ini"
     config = configparser.ConfigParser()
-    config.read('/config.ini')
+    config.read('config.ini')
 
     # Indstillinger for forbindelse til databasen
     # Køres scriptet på en Windows-server, skal sqldriver normalt være "{SQL Server}",
