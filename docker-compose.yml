@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+
+  proocessrobot_api_doc:
+    image: php:7.2-apache
+    container_name: proocessrobot_api_doc
+    restart: always
+    environment:
+     - VIRTUAL_HOST=${API_DOC_VIRTUAL_HOST}
+    networks:
+     - web
+     - default
+    volumes:
+      - "./doc:/var/www/html/"
+      - "./docker-files/apache.conf:/etc/apache2/sites-available/000-default.conf"
+    ports:
+     - "5006:80" 
+
+  proocessrobot_api_interface:
+    image: php:7.2-apache
+    container_name: proocessrobot_api_interface
+    restart: always
+    environment:
+     - VIRTUAL_HOST=${API_INTERFACE_VIRTUAL_HOST}
+    networks:
+     - web
+     - default
+    volumes:
+      - "./interface:/var/www/html/"
+      - "./docker-files/apache.conf:/etc/apache2/sites-available/000-default.conf" 
+    ports:
+     - "5007:80"
+
+  proocessrobot_api:
+    container_name: proocessrobot_api
+    build: .
+    environment:
+     - VIRTUAL_HOST=${API_VIRTUAL_HOST}
+    networks:
+     - web
+     - default
+    ports:
+     - "5005:5005"
+    volumes:
+     - "./config.ini:/config.ini"
+        
+networks:
+  web:
+    external: true

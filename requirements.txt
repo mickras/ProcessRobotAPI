@@ -2,3 +2,4 @@ Flask==1.1.1
 Flask-RESTful==0.3.7
 Flask-Script==2.0.6
 pyodbc
+configparser==3.8.1

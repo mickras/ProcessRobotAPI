@@ -252,6 +252,41 @@ def unknown_parameter():
     }
     return error_string
 
+class GetQueueItemsFromQueue(Resource):
+
+    """
+    @api {get} /getqueueitemsfromqueue/[:queue_id]
+    @apiName GetQueueItemsFromQueue
+    @apiGroup Queue
+    @apiVersion 0.0.1
+
+    @apiDescription Returns a list of all queues in ProcessRobot, including
+    the number of new items in each queue.
+
+    @apiExample {curl} Example usage:
+        curl -i http://localhost/getqueueitemsfromqueue/[:queue_id]
+
+    @apiSuccess {Int} queue_item_id ProcessRobots ID on the queue item
+    @apiSuccess {String} queue_item_type The Processrobot type of the queue item
+    @apiSuccess {String} queue_value The data of the queue item
+    @apiSuccess {Int} priority The priority of the queue item
+
+    @apiSuccessExample {json} Success-Response:
+        [
+            {
+                "queue_item_id": 4262,
+                "queue_item_type": "Custom Object",
+                "queue_value": "<Variables>\n  <CustomObject Name=\"data\">\n    <key><![CDATA[data]]></key>\n    <value>\n      <Text Name=\"data\">\n        <Text.Value><![CDATA[data]]></Text.Value>\n      </Text>\n    </value>\n    <key><![CDATA[data]]></key>\n    <value>\n      <Text Name=\"data\">\n        <Text.Value><![CDATA[ data ]]></Text.Value>\n      </Text>\n    </value>\n    <key><![CDATA[data]]></key>\n    <value>\n      <Text Name=\"data\">\n        <Text.Value><![CDATA[]]></Text.Value>\n      </Text>\n    </value>\n    <key><![CDATA[data]]></key>\n    <value>\n      <Text Name=\"data\">\n        <Text.Value><![CDATA[]]></Text.Value>\n      </Text>\n    </value>\n    <key><![CDATA[Timestamp]]></key>\n    <value>\n      <Text Name=\"data\">\n        <Text.Value><![CDATA[]]></Text.Value>\n      </Text>\n    </value>\n    <key><![CDATA[Fejl]]></key>\n    <value>\n      <Text Name=\"data\">\n        <Text.Value><![CDATA[]]></Text.Value>\n      </Text>\n    </value>\n  </CustomObject>\n</Variables>",
+                "priority": 1
+            }
+        ]
+    """
+
+    def get(self, queue_id):
+        log_handler = LogHandler()
+        result = log_handler.GetQueueItemsById(queue_id)
+        return result, 200
+
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 api = Api(app)
@@ -261,6 +296,7 @@ api.add_resource(LatestLogTimestamp, "/latestlogtimestamp/", "/latestlogtimestam
 api.add_resource(LatestLogRecord, "/latestlogrecord/", "/latestlogrecord/<event_type>/")
 api.add_resource(TimeSinceLastLogEntry, "/timesincelastlogentry/", "/timesincelastlogentry/<event_type>/")
 api.add_resource(QueueStats, "/queuestats/")
+api.add_resource(GetQueueItemsFromQueue, "/getqueueitemsfromqueue/<queue_id>/")
 
 if __name__ == '__main__':
      app.run(port='5005',debug=True,host='0.0.0.0')
