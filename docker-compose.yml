@@ -14,6 +14,8 @@ services:
     volumes:
       - "./doc:/var/www/html/"
       - "./docker-files/apache.conf:/etc/apache2/sites-available/000-default.conf"
+    ports:
+     - "5006:80" 
 
   proocessrobot_api_interface:
     image: php:7.2-apache
@@ -27,6 +29,8 @@ services:
     volumes:
       - "./interface:/var/www/html/"
       - "./docker-files/apache.conf:/etc/apache2/sites-available/000-default.conf" 
+    ports:
+     - "5007:80"
 
   proocessrobot_api:
     container_name: proocessrobot_api
